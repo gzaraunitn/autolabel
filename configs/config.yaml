@@ -1,0 +1,96 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - setting: kinetics_nec
+network:
+  arch: ViT-B/32  # ViT-B/32 ViT-B/16
+  tsm: False
+  dropout: 0.0
+  emb_dropout: 0.0
+  init: True
+  joint: False
+  sim_header: "Transf"  #Transf   meanP  LSTM Conv_1D Transf_cls
+  dim: 512
+  freeze: none
+  pretrained_model: ""
+data:
+  num_segments: 8
+  input_size: 224
+  batch_size: 8
+  workers: 4
+  randaug:
+    N: 2
+    M: 9
+  frame_tmpl: "{:05d}.jpg"
+  random_shift: True
+  class_augmenter:
+    enabled: False
+    version: verb_classes
+  feat_dim: 512
+  clean_ek: False
+logging:
+  wandb: False
+  neptune: False
+  comet: False
+  workspace_name: gzaraunitn
+  project_name: clip-oda
+  run_name: ${data.dataset}-s=${loss.source.weight}-t=${loss.target.weight}
+  tag: ""
+  save: False
+  verbose: False
+loss:
+  source:
+    weight: 1.0
+  target:
+    weight: 0.0
+    confidence_threshold: 0.0
+    use_gt: False
+    filtering: single_threshold
+    k: 10
+    k_type: percentage
+    class_wise_thresholds_computation: offline
+    class_wise_thresholds_computation_frequency: 5
+  target_consistency:
+    weight: 0.0
+solver:
+  type: cosine
+  lr: 5.e-6
+  optim: adamw
+  lr_warmup_steps: 3
+  lr_decay_steps: [4, 8, 12, 16]
+  start_epoch: 0
+  epochs: 30
+  ratio: 1
+  f_ratio: 10
+  weight_decay: 0.2
+  momentum: 0.9
+  prompt_optimizer: sgd
+  single_optimizer: False
+general:
+  sanity_check: True
+  sanity_check_steps: 2
+  slurm: False
+  alderaan: False
+  hpc: False
+open_set:
+  method: autolabel
+  threshold: 0.5
+attributes:
+  clustering_method: kmeans
+  k_clustering: 20
+  n_attributes: 3
+  selection: threshold
+  tf_idf_threshold: 0.6
+  t_selection: 2
+  n_blanks: 5
+  matching_threshold: 0.5
+  tf_idf_topk_source: 3
+  tf_idf_topk_target: 3
+  use_vilt_order: False
+  final_prompt_length: 3
+  use_elbow: False
+  sinkhorn:
+    iters: 3
+    epsilon: 0.05
+seed: 9086

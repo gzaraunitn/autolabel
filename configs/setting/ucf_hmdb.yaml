@@ -1,0 +1,9 @@
+# @package _global_
+data:
+  dataset: ucf_hmdb
+  source_train_file: "txt/hmdb-ucf/ucf_train_source.txt"
+  target_train_file: "txt/hmdb-ucf/hmdb_train_target.txt"
+  test_file: "txt/hmdb-ucf/hmdb_test_target.txt"
+  source_dataset: ucf
+  target_dataset: hmdb
+  root: "dataset/hmdb-ucf"

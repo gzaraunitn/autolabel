@@ -1,0 +1,9 @@
+# @package _global_
+data:
+  dataset: olympics_ucf
+  source_train_file: "txt/ucf-olympics/olympics_train_source.txt"
+  target_train_file: "txt/ucf-olympics/ucf_train_target.txt"
+  test_file: "txt/ucf-olympics/ucf_test_target.txt"
+  source_dataset: olympics
+  target_dataset: ucf
+  root: "dataset/ucf-olympics"

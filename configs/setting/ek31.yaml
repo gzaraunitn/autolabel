@@ -1,0 +1,9 @@
+# @package _global_
+data:
+  dataset: ek31
+  source_train_file: "txt/epic-kitchens/D3_train_source.txt"
+  target_train_file: "txt/epic-kitchens/D1_train_target.txt"
+  test_file: "txt/epic-kitchens/D1_test_target.txt"
+  source_dataset: D3
+  target_dataset: D1
+  root: "dataset/epic-kitchens"
